@@ -8,8 +8,6 @@ int main() {
 
     srand(static_cast<unsigned int>(time(NULL)));
 
-    //std::cout << "DEBUG: Random seed inicializada.\n";
-
     Simulador simulador;
     simulador.run();
 
