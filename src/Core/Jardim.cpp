@@ -134,5 +134,5 @@ Jardim::Jardim(const Jardim &origem) : linhas(origem.linhas), colunas(origem.col
             }
         }
     }
-    std::cout << "DEBUG: Jogo gravado (Copia do Jardim criada).\\n";
+    std::cout << "Jogo gravado (Copia do Jardim criada).\\n";
 }

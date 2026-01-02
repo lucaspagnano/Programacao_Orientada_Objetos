@@ -26,7 +26,7 @@ bool LArea::executa(Simulador& s) {
     Jardim* j = s.getJardim();
     Jardineiro* jardineiro = s.getJardineiro();
 
-    std::cout << "--- Relatorio da Area (Conteudo Nao-Vazio) ---\n";
+    std::cout << "--- Relatorio da Area ---\n";
     bool encontrouAlgo = false;
 
     for (int l = 0; l < j->getLinhas(); l++) {
@@ -47,7 +47,7 @@ bool LArea::executa(Simulador& s) {
             }
 
             if (jardineiro->estaNoJardim() && jardineiro->getPosLinha() == l && jardineiro->getPosColuna() == c) {
-                conteudoStr += "[JARDINEIRO] ";
+                conteudoStr += "[Jardineiro] ";
                 temCoisa = true;
             }
 
@@ -57,7 +57,7 @@ bool LArea::executa(Simulador& s) {
                 char coordC = 'A' + c;
 
                 std::cout << "Posicao " << coordL << coordC << ": " << conteudoStr << "\n";
-                std::cout << "  -> Solo: Agua=" << p->getAgua() << " | Nutri=" << p->getNutrientes() << "\n";
+                std::cout << "    Solo: Agua=" << p->getAgua() << " | Nutri=" << p->getNutrientes() << "\n";
             }
         }
     }

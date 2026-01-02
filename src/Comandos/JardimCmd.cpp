@@ -31,7 +31,7 @@ JardimCmd::JardimCmd(const std::vector<std::string>& args): linhas(0), colunas(0
     }
 
     this->valido = true;
-    std::cout << "DEBUG: Comando 'jardim " << linhas << " " << colunas << "' validado.\n";
+    //std::cout << "DEBUG: Comando 'jardim " << linhas << " " << colunas << "' validado.\n";
 }
 
 bool JardimCmd::executa(Simulador& s) {
@@ -46,7 +46,7 @@ bool JardimCmd::executa(Simulador& s) {
     }
 
     s.criaJardim(linhas, colunas);
-    std::cout << "Jardim " << linhas << "x" << colunas << " criado com sucesso.\n";
+    //std::cout << "Jardim " << linhas << "x" << colunas << " criado com sucesso.\n";
     
     return true;
 }

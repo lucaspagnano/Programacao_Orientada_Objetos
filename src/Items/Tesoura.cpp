@@ -22,7 +22,7 @@ void Tesoura::usar(Jardim& j, int l, int c) {
     if (planta != nullptr) {
         if (planta->getBeleza() == "Feia" || planta->getBeleza() == "feia") {
             delete p->removePlanta();
-            std::cout << "CORTADA! Uma planta feia foi removida da posicao " << l << " " << c << ".\n";
+            std::cout << "Uma planta feia foi cortada da posicao " << l << " " << c << ".\n";
 
         } else {
             std::cout << "A tesoura so corta plantas feias. Esta (" << planta->getBeleza() << ") foi poupada.\n";

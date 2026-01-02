@@ -14,7 +14,7 @@ Jardineiro::Jardineiro()
       ferramentaNaMao(nullptr)
 {
     resetContadoresTurno();
-    std::cout << "DEBUG: Jardineiro criado.\n";
+    //std::cout << "DEBUG: Jardineiro criado.\n";
 }
 
 Jardineiro::~Jardineiro() {
@@ -36,7 +36,7 @@ void Jardineiro::entra(int l, int c) {
     posLinha = l;
     posColuna = c;
     registarEntradaSaida();
-    std::cout << "Jardineiro entrou em (" << l << ", " << c << ")\n";
+    //std::cout << "Jardineiro entrou em (" << l << ", " << c << ")\n";
 }
 
 void Jardineiro::sai() {
@@ -44,7 +44,7 @@ void Jardineiro::sai() {
     posLinha = -1;
     posColuna = -1;
     registarEntradaSaida();
-    std::cout << "Jardineiro saiu do jardim.\n";
+    //std::cout << "Jardineiro saiu do jardim.\n";
 }
 
 void Jardineiro::move(char direcao) {
@@ -75,13 +75,13 @@ void Jardineiro::usarFerramenta(Jardim& jardim) {
         return;
     }
 
-    std::cout << "[Jardineiro] A usar " << ferramentaNaMao->getNome() << "...\n";
+    std::cout << "Jardineiro esta usando " << ferramentaNaMao->getNome() << "\n";
 
     ferramentaNaMao->usar(jardim, posLinha, posColuna);
 
     if (ferramentaNaMao->deveQuebrar()) {
-        std::cout << "!!! A ferramenta " << ferramentaNaMao->getNome()
-                  << " (ID: " << ferramentaNaMao->getNumSerie() << ") quebrou/acabou e foi deitada fora! !!!\n";
+        std::cout << "A ferramenta " << ferramentaNaMao->getNome()
+                  << " (ID: " << ferramentaNaMao->getNumSerie() << ") quebrou/acabou e foi deitada fora\n";
 
         delete ferramentaNaMao;
         ferramentaNaMao = nullptr;
@@ -91,20 +91,20 @@ void Jardineiro::usarFerramenta(Jardim& jardim) {
 void Jardineiro::listarFerramentas() const {
     std::cout << "--- Inventario do Jardineiro ---\n";
     if (ferramentaNaMao != nullptr) {
-        std::cout << "NA MAO: " << ferramentaNaMao->getNome()
-                  << " (ID: " << ferramentaNaMao->getNumSerie() << ")\n";
+        std::cout << "NA MAO: " << "\n    " << ferramentaNaMao->getNome() << " (ID: " << ferramentaNaMao->getNumSerie() << ")\n";
     } else {
-        std::cout << "NA MAO: (vazio)\n";
+        std::cout << "NA MAO: \n    (vazio)\n";
     }
 
     std::cout << "MOCHILA:\n";
     if (ferramentasTransportadas.empty()) {
-        std::cout << "  (vazia)\n";
+        std::cout << "    (vazia)\n";
     } else {
         for (Ferramenta* f : ferramentasTransportadas) {
-            std::cout << "  - " << f->getNome() << " (ID: " << f->getNumSerie() << ")\n";
+            std::cout << "    " << f->getNome() << " (ID: " << f->getNumSerie() << ")\n";
         }
     }
+    std::cout << "-------------------------------- \n";
 }
 
 void Jardineiro::largaFerramenta() {
@@ -114,7 +114,7 @@ void Jardineiro::largaFerramenta() {
     }
 
     ferramentasTransportadas.push_back(ferramentaNaMao);
-    std::cout << "Guardaste " << ferramentaNaMao->getNome() << " na mochila.\n";
+    std::cout << ferramentaNaMao->getNome() << "guardada/o na mochila.\n";
 
     ferramentaNaMao = nullptr;
 }
@@ -124,7 +124,7 @@ void Jardineiro::pegaFerramenta(int numSerie) {
         [numSerie](Ferramenta* f) { return f->getNumSerie() == numSerie; });
 
     if (it == ferramentasTransportadas.end()) {
-        std::cout << "Nao tens nenhuma ferramenta com ID " << numSerie << " na mochila.\n";
+        std::cout << "Nao existe ferramenta com ID " << numSerie << " na mochila.\n";
         return;
     }
 
@@ -133,13 +133,13 @@ void Jardineiro::pegaFerramenta(int numSerie) {
     ferramentasTransportadas.erase(it);
 
     if (ferramentaNaMao != nullptr) {
-        std::cout << "Guardaste " << ferramentaNaMao->getNome() << " na mochila.\n";
+        std::cout << ferramentaNaMao->getNome() << "guardada/o na mochila.\n";
         ferramentasTransportadas.push_back(ferramentaNaMao);
     }
 
     ferramentaNaMao = novaFerramenta;
 
-    std::cout << "Pegaste em " << ferramentaNaMao->getNome() << " (ID: " << numSerie << ").\n";
+    std::cout << "Pegou em " << ferramentaNaMao->getNome() << " (ID: " << numSerie << ").\n";
 }
 
 void Jardineiro::compraFerramenta(Ferramenta* f) {
@@ -147,8 +147,8 @@ void Jardineiro::compraFerramenta(Ferramenta* f) {
 
     ferramentasTransportadas.push_back(f);
 
-    std::cout << "DEBUG: O Jardineiro guardou " << f->getNome()
-              << " na mochila. Total de itens: " << ferramentasTransportadas.size() << "\n";
+    std::cout << "O Jardineiro comprou " << f->getNome()
+              << ". Total de itens: " << ferramentasTransportadas.size() << "\n";
 }
 
 void Jardineiro::resetContadoresTurno() {
@@ -169,13 +169,13 @@ void Jardineiro::registarEntradaSaida() { if (entradasSaidasTurno > 0) entradasS
 
 void Jardineiro::colherPlanta(Jardim& jardim) {
     if (!estaNoJardim()) {
-        std::cout << "O jardineiro nao esta no jardim.\n";
+        std::cout << "O jardineiro ainda nao esta no jardim.\n";
         return;
     }
 
     if (!podeColher()) {
-        std::cout << "Ja atingiste o limite de " << Settings::Jardineiro::max_colheitas
-                  << " colheitas por turno! Avanca o tempo para recarregar.\n";
+        std::cout << "Ja atingiu limite de " << Settings::Jardineiro::max_colheitas
+                  << " colheitas por turno. Avanca o tempo para recarregar.\n";
         return;
     }
 
@@ -189,13 +189,13 @@ void Jardineiro::colherPlanta(Jardim& jardim) {
 
     std::string beleza = planta->getBeleza();
     if (beleza == "Feia" || beleza == "feia") {
-        std::cout << "Nao deves colher Ervas Daninhas a mao! Usa a Tesoura e avanca o tempo.\n";
+        std::cout << "Nao deves colher Ervas Daninhas a mao. Pegue a Tesoura e avanca o tempo.\n";
         return;
     }
 
     registarColheita();
 
-    std::cout << "Colheste uma planta " << beleza << " (" << planta->getChar() << ")!\n";
+    std::cout << "Planta colhida: " << beleza << " (" << planta->getChar() << ")!\n";
     std::cout << "Restam " << this->colheitasTurno << " colheitas neste turno.\n";
 
     delete p->removePlanta();

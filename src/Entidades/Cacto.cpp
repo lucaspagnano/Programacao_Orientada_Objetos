@@ -28,7 +28,7 @@ void Cacto::agir(Jardim& jardim, int l, int c) {
     if (posAtual->getAgua() > Settings::Cacto::morre_agua_solo_maior ||
         posAtual->getNutrientes() < Settings::Cacto::morre_nutrientes_solo_menor) {
 
-        std::cout << "Um Cacto morreu devido as condicoes do solo!\n";
+        std::cout << "Um Cacto morreu devido as condicoes do solo\n";
         delete posAtual->removePlanta();
         return;
         }

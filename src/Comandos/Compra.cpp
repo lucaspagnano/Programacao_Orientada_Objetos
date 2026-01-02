@@ -8,7 +8,7 @@
 
 Compra::Compra(const std::vector<std::string>& args) {
     if (args.size() != 1) {
-        std::cout << "Erro: Sintaxe 'compra <tipo>' (g=regador, a=adubo, t=tesoura, z=ferramentaZ).\n";
+        std::cout << "Erro: Comando 'compra <tipo>' (g=regador, a=adubo, t=tesoura, z=ferramentaZ).\n";
         valido = false;
         return;
     }

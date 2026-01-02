@@ -42,7 +42,7 @@ std::vector<std::string> splitString(const std::string& str) {
 
 Simulador::Simulador(): jardim(nullptr),jardineiro(),instanteAtual(0),running(true)
 {
-    std::cout << "DEBUG: Simulador iniciado.\n";
+    //std::cout << "DEBUG: Simulador iniciado.\n";
 }
 
 Simulador::~Simulador() {
@@ -53,7 +53,7 @@ Simulador::~Simulador() {
     }
     saves.clear();
 
-    std::cout << "DEBUG: Simulador encerrado. Toda a memoria (incluindo saves) foi limpa.\n";
+    //std::cout << "DEBUG: Simulador encerrado. Toda a memoria (incluindo saves) foi limpa.\n";
 }
 
 Jardim* Simulador::getJardim() {
@@ -77,7 +77,7 @@ void Simulador::criaJardim(int l, int c) {
 void Simulador::avancaInstante(int n) {
     for (int i = 0; i < n; ++i) {
         instanteAtual++;
-        std::cout << "\n--- Avancando para o Instante " << instanteAtual << " ---\n";
+        //std::cout << "\n--- Avancando para o Instante " << instanteAtual << " ---\n";
 
         jardineiro.resetContadoresTurno();
 
@@ -167,7 +167,7 @@ void Simulador::run() {
     while (running) {
         mostraJardim();
 
-        std::cout << "Instante " << instanteAtual << " > ";
+        std::cout << "\n" << "Instante " << instanteAtual << " > ";
 
         if (!std::getline(std::cin, linha)) {
             break;

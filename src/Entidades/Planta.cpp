@@ -7,7 +7,7 @@ Planta::Planta(int agua, int nutrientes, const std::string& beleza)
       beleza(beleza),
       instantesDeVida(0)
 {
-    std::cout << "DEBUG: Planta base criada.\n";
+    //std::cout << "DEBUG: Planta base criada.\n";
 }
 
 int Planta::getAguaInterna() const {

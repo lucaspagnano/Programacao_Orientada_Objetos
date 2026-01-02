@@ -31,7 +31,7 @@ Avanca::Avanca(const std::vector<std::string>& args): instantes(1)
     }
 
     this->valido = true;
-    std::cout << "DEBUG: Comando 'avanca " << this->instantes << "' validado.\n";
+    //std::cout << "DEBUG: Comando 'avanca " << this->instantes << "' validado.\n";
 }
 
 bool Avanca::executa(Simulador& s) {
@@ -41,7 +41,7 @@ bool Avanca::executa(Simulador& s) {
     }
 
     if (!s.isJardimCriado()) {
-        std::cout << "Erro: Nao pode avancar. O jardim ainda nao foi criado.\n";
+        std::cout << "Erro: O jardim ainda nao foi criado.\n";
         return false;
     }
 

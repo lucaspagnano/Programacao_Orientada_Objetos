@@ -13,7 +13,8 @@ Larga::Larga(const std::vector<std::string>& args) {
 }
 
 bool Larga::executa(Simulador& s) {
-    if (!this->valido) return false;
+    if (!this->valido)
+        return false;
     s.getJardineiro()->largaFerramenta();
     return true;
 }

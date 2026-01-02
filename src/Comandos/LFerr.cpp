@@ -13,7 +13,8 @@ LFerr::LFerr(const std::vector<std::string>& args) {
 }
 
 bool LFerr::executa(Simulador& s) {
-    if (!this->valido) return false;
+    if (!this->valido)
+        return false;
     Jardineiro* jardineiro = s.getJardineiro();
     jardineiro->listarFerramentas();
     return true;

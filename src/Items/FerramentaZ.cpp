@@ -14,8 +14,6 @@ char FerramentaZ::getChar() const {
 }
 
 void FerramentaZ::usar(Jardim& jardim, int l, int c) {
-    std::cout << "[Drone] A regar area 3x3 em redor de (" << l << "," << c << ")...\n";
-
     int contador = 0;
     for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
@@ -29,5 +27,5 @@ void FerramentaZ::usar(Jardim& jardim, int l, int c) {
             }
         }
     }
-    std::cout << "Drone regou " << contador << " posicoes (+20 agua cada).\n";
+    std::cout << "Drone regou " << contador << " posicoes em redor de (" << l << "," << c << ")\n";
 }

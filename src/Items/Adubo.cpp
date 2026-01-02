@@ -8,7 +8,7 @@ Adubo::Adubo()
     : Ferramenta("Pacote de Adubo"),
       capacidade(Settings::Adubo::capacidade)
 {
-    std::cout << "DEBUG: Adubo (S/N " << getNumSerie() << ") criado.\n";
+    //std::cout << "DEBUG: Adubo (S/N " << getNumSerie() << ") criado.\n";
 }
 
 char Adubo::getChar() const {

@@ -5,7 +5,7 @@
 
 Entra::Entra(const std::vector<std::string>& args) {
     if (args.size() != 1) {
-        std::cout << "Erro: Sintaxe 'entra <coordenada>' (ex: entra aa).\n";
+        std::cout << "Erro: Comando 'entra <coordenada>' (ex: entra aa).\n";
         this->valido = false;
         return;
     }

@@ -38,7 +38,7 @@ void Roseira::agir(Jardim& jardim, int l, int c) {
         Posicao* vizinho = jardim.getVizinhoLivreAleatorio(l, c);
 
         if (vizinho != nullptr) {
-            std::cout << "Uma Roseira reproduziu-se para o lado!\n";
+            std::cout << "Uma Roseira reproduziu-se para o lado.\n";
 
             vizinho->setPlanta(new Roseira());
 

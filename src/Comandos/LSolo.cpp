@@ -27,13 +27,13 @@ LSolo::LSolo(const std::vector<std::string>& args): raio(0)
         int n_raio;
 
         if (!(ss >> n_raio)) {
-            std::cout << "Erro: 'lsolo [n]' - 'n' (raio) deve ser um numero inteiro.\n";
+            std::cout << "Erro: 'lsolo <l><c> [n]' - 'n' (raio) deve ser um numero inteiro.\n";
             this->valido = false;
             return;
         }
 
         if (n_raio < 0) {
-            std::cout << "Erro: 'lsolo [n]' - 'n' (raio) nao pode ser negativo.\n";
+            std::cout << "Erro: 'lsolo <l><c> [n]' - 'n' (raio) nao pode ser negativo.\n";
             this->valido = false;
             return;
         }
@@ -45,7 +45,8 @@ LSolo::LSolo(const std::vector<std::string>& args): raio(0)
 }
 
 bool LSolo::executa(Simulador& s) {
-    if (!this->valido) return false;
+    if (!this->valido)
+        return false;
 
     if (!s.isJardimCriado()) {
         std::cout << "Erro: Nao pode listar. O jardim ainda nao foi criado.\n";
@@ -80,6 +81,8 @@ bool LSolo::executa(Simulador& s) {
 
                 if (p->getFerramenta() != nullptr) {
                     std::cout << " | Item: " << p->getFerramenta()->getNome();
+                } else {
+                    std::cout << " | Item: Nenhum";
                 }
 
                 std::cout << "\n";

@@ -31,7 +31,7 @@ void ErvaDaninha::agir(Jardim& jardim, int l, int c) {
         Posicao* vizinho = jardim.getVizinhoLivreAleatorio(l, c);
 
         if (vizinho != nullptr) {
-            std::cout << "PRAGA! A Erva Daninha espalhou-se!\n";
+            std::cout << "A Erva Daninha espalhou-se!\n";
             vizinho->setPlanta(new ErvaDaninha());
 
             this->nutrientesInternos -= 10;

@@ -24,7 +24,7 @@ PlantaCmd::PlantaCmd(const std::vector<std::string>& args) {
     this->tipoPlanta = args[1][0];
 
     if (tipoPlanta != 'c' && tipoPlanta != 'r' && tipoPlanta != 'e' && tipoPlanta != 'x') {
-        std::cout << "Erro: Tipo invalido. Use (c, r, e, x).\n";
+        std::cout << "Erro: Tipo invalido (c, r, e, x).\n";
         this->valido = false;
         return;
     }
@@ -33,7 +33,7 @@ PlantaCmd::PlantaCmd(const std::vector<std::string>& args) {
 
 bool PlantaCmd::executa(Simulador& s) {
     if (!this->valido) return false;
-    if (!s.isJardimCriado()) { std::cout << "Jardim nao existe.\n"; return false; }
+    if (!s.isJardimCriado()) { std::cout << "Jardim ainda nao existe.\n"; return false; }
 
     Jardineiro* jardineiro = s.getJardineiro();
 
@@ -70,6 +70,6 @@ bool PlantaCmd::executa(Simulador& s) {
     p->setPlanta(novaPlanta);
     jardineiro->registarPlantacao();
 
-    std::cout << "Plantaste uma " << novaPlanta->getBeleza() << " (" << tipoPlanta << ") em " << this->coord << ".\n";
+    //std::cout << "Plantaste uma " << novaPlanta->getBeleza() << " (" << tipoPlanta << ") em " << this->coord << ".\n";
     return true;
 }

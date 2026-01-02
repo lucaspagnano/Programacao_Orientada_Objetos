@@ -8,12 +8,14 @@ Move::Move(const std::vector<std::string>& args): direcao('?')
 {
     if (args.size() != 1) {
         std::cout << "Erro: Comando 'move' (ou setas) requer direcao.\n";
-        this->valido = false; return;
+        this->valido = false;
+        return;
     }
     char dir = args[0][0];
     if (dir != 'e' && dir != 'd' && dir != 'c' && dir != 'b') {
         std::cout << "Erro: Direcao invalida.\n";
-        this->valido = false; return;
+        this->valido = false;
+        return;
     }
     this->direcao = dir;
     this->valido = true;
@@ -21,16 +23,21 @@ Move::Move(const std::vector<std::string>& args): direcao('?')
 
 bool Move::executa(Simulador& s) {
     if (!this->valido) return false;
-    if (!s.isJardimCriado()) { std::cout << "Erro: Jardim nao criado.\n"; return false; }
+    if (!s.isJardimCriado()) {
+        std::cout << "Erro: Jardim nao criado.\n";
+        return false;
+    }
 
     Jardineiro* jardineiro = s.getJardineiro();
     Jardim* jardim = s.getJardim();
 
     if (!jardineiro->estaNoJardim()) {
-        std::cout << "Erro: Jardineiro fora do jardim.\n"; return false;
+        std::cout << "Erro: Jardineiro fora do jardim.\n";
+        return false;
     }
     if (!jardineiro->podeMover()) {
-        std::cout << "Erro: Jardineiro cansado.\n"; return false;
+        std::cout << "Erro: Jardineiro cansado.\n";
+        return false;
     }
 
     int l = jardineiro->getPosLinha();
@@ -42,12 +49,13 @@ bool Move::executa(Simulador& s) {
     else if (this->direcao == 'd') c++;
 
     if (!jardim->isPosicaoValida(l, c)) {
-        std::cout << "Erro: Limite do jardim.\n"; return false;
+        std::cout << "Erro: Limite do jardim.\n";
+        return false;
     }
 
     jardineiro->move(this->direcao);
     jardineiro->registarMovimento();
-    std::cout << "Jardineiro moveu-se para " << l << " " << c << ".\n";
+    //std::cout << "Jardineiro moveu-se para " << l << " " << c << ".\n";
 
     Posicao* pos = jardim->getPosicao(l, c);
 
