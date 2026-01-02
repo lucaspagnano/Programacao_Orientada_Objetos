@@ -68,6 +68,26 @@ class Settings {
         static const int nova_nutrientes = 5;
         static const int original_nutrientes = 5;
     };
+    class FerramentaZ {
+    public:
+        static const int agua_adicionada = 20;
+        static const int custo_bateria = 10;
+    };
+
+    class PlantaExotica {
+    public:
+        static const int inicial_agua = 20;
+        static const int inicial_nutrientes = 10;
+
+        static const int consumo_agua = 5;
+        static const int consumo_nutrientes = 1;
+
+        static const int bebe_agua = 10;
+        static const int bebe_nutrientes = 2;
+
+        static const int min_agua_reproduz = 40;
+        static const int custo_agua_reproduz = 20;
+    };
 };
 
 #endif //SETTINGS_SETTINGS_H

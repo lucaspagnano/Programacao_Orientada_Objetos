@@ -7,6 +7,7 @@
 #include "../../include/Entidades/Roseira.h"
 #include "../../include/Entidades/Cacto.h"
 #include "../../include/Entidades/ErvaDaninha.h"
+#include "../../include/Entidades/PlantaExotica.h"
 #include <iostream>
 
 PlantaCmd::PlantaCmd(const std::vector<std::string>& args) {
@@ -62,7 +63,7 @@ bool PlantaCmd::executa(Simulador& s) {
         case 'r': novaPlanta = new Roseira(); break;
         case 'c': novaPlanta = new Cacto(); break;
         case 'e': novaPlanta = new ErvaDaninha(); break;
-        // case 'x': novaPlanta = new PlantaExotica(); break;
+        case 'x': novaPlanta = new PlantaExotica(); break;
         default: std::cout << "Erro interno.\n"; return false;
     }
 
