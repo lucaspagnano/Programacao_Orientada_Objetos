@@ -1,4 +1,4 @@
-    #ifndef SETTINGS_SETTINGS_H
+#ifndef SETTINGS_SETTINGS_H
 #define SETTINGS_SETTINGS_H
 
 class Settings {
