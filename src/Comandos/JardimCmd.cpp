@@ -1,7 +1,6 @@
 #include "../../include/Comandos/JardimCmd.h"
 #include "../../include/Core/Simulador.h"
 #include "../../include/Core/Settings.h"
-
 #include <iostream>
 #include <sstream>
 

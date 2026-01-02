@@ -1,8 +1,8 @@
 #include "../../include/Comandos/LPlanta.h"
 #include "../../include/Core/Simulador.h"
-#include "../../include/Core/Jardim.h"   // Necessario para aceder ao jardim
-#include "../../include/Core/Posicao.h"  // Necessario para aceder a posicao
-#include "../../include/Entidades/Planta.h" // Necessario para ver os dados da planta
+#include "../../include/Core/Jardim.h"
+#include "../../include/Core/Posicao.h"
+#include "../../include/Entidades/Planta.h"
 #include <iostream>
 
 LPlanta::LPlanta(const std::vector<std::string>& args) {
@@ -30,20 +30,16 @@ bool LPlanta::executa(Simulador& s) {
         return false;
     }
 
-    // 1. Converter coordenadas (ex: "aa" -> 0, 0)
-    // Assumindo que sao letras minusculas conforme o padrao do projeto
     int l = this->coord[0] - 'a';
     int c = this->coord[1] - 'a';
 
     Jardim* jardim = s.getJardim();
 
-    // 2. Validar se esta dentro do mapa
     if (!jardim->isPosicaoValida(l, c)) {
         std::cout << "Erro: Coordenada " << this->coord << " fora dos limites do jardim.\n";
         return false;
     }
 
-    // 3. Obter a Planta
     Posicao* p = jardim->getPosicao(l, c);
     Planta* planta = p->getPlanta();
 
@@ -52,7 +48,6 @@ bool LPlanta::executa(Simulador& s) {
         return true;
     }
 
-    // 4. Mostrar Relatorio Completo
     std::cout << ">>> Relatorio da Planta em " << this->coord << " <<<\n";
     std::cout << "Especie: " << planta->getBeleza() << " (" << planta->getChar() << ")\n";
     std::cout << "Idade:   " << planta->getInstantesDeVida() << " instantes\n";

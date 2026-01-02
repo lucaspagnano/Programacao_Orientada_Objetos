@@ -26,7 +26,6 @@ bool LPlantas::executa(Simulador& s) {
     std::cout << "--- Relatorio Geral de Plantas ---\n";
 
     bool encontrou = false;
-    // Percorre todas as linhas e colunas
     for (int l = 0; l < j->getLinhas(); l++) {
         for (int c = 0; c < j->getColunas(); c++) {
             Posicao* p = j->getPosicao(l, c);
@@ -34,7 +33,6 @@ bool LPlantas::executa(Simulador& s) {
 
             if (planta != nullptr) {
                 encontrou = true;
-                // Converte indices para letras (0->A, 1->B...) para ficar bonito
                 char coordL = 'A' + l;
                 char coordC = 'A' + c;
 

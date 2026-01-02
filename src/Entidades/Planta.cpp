@@ -1,7 +1,6 @@
 #include "../../include/Entidades/Planta.h"
 #include <iostream>
 
-// Construtor
 Planta::Planta(int agua, int nutrientes, const std::string& beleza)
     : aguaInterna(agua),
       nutrientesInternos(nutrientes),
@@ -34,6 +33,3 @@ void Planta::setAguaInterna(int valor) {
 void Planta::setNutrientesInternos(int valor) {
     nutrientesInternos = valor;
 }
-
-// Nota: O metodo 'agir' e 'getChar' não são implementados aqui
-// porque são puramente virtuais (a planta base não sabe como agir).

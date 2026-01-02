@@ -4,22 +4,19 @@
 #include <iostream>
 
 Entra::Entra(const std::vector<std::string>& args) {
-    // CORREÇÃO: O vetor args contém apenas os argumentos, não o nome do comando.
-    // Para 'entra aa', o tamanho deve ser 1.
     if (args.size() != 1) {
         std::cout << "Erro: Sintaxe 'entra <coordenada>' (ex: entra aa).\n";
         this->valido = false;
         return;
     }
 
-    // CORREÇÃO: Acedemos ao índice 0 (o primeiro argumento)
     if (args[0].length() != 2) {
         std::cout << "Erro: Coordenada invalida (deve ter 2 letras).\n";
         this->valido = false;
         return;
     }
 
-    this->coord = args[0]; // Guardamos a coordenada correta
+    this->coord = args[0];
     this->valido = true;
 }
 

@@ -1,7 +1,7 @@
 #include "../../include/Comandos/Move.h"
 #include "../../include/Core/Simulador.h"
 #include "../../include/Core/Jardim.h"
-#include "../../include/Core/Posicao.h" // Importante para aceder à Posicao
+#include "../../include/Core/Posicao.h"
 #include <iostream>
 
 Move::Move(const std::vector<std::string>& args): direcao('?')
@@ -33,7 +33,6 @@ bool Move::executa(Simulador& s) {
         std::cout << "Erro: Jardineiro cansado.\n"; return false;
     }
 
-    // Calcular nova posição
     int l = jardineiro->getPosLinha();
     int c = jardineiro->getPosColuna();
 
@@ -46,17 +45,13 @@ bool Move::executa(Simulador& s) {
         std::cout << "Erro: Limite do jardim.\n"; return false;
     }
 
-    // 1. Mover
     jardineiro->move(this->direcao);
     jardineiro->registarMovimento();
     std::cout << "Jardineiro moveu-se para " << l << " " << c << ".\n";
 
-    // 2. --- LÓGICA DE APANHAR FERRAMENTA ---
     Posicao* pos = jardim->getPosicao(l, c);
 
-    // Verifica se há ferramenta no chão
     if (pos->getFerramenta() != nullptr) {
-        // Remove do chão e entrega ao jardineiro
         Ferramenta* f = pos->removeFerramenta();
         jardineiro->apanhaFerramenta(f);
     }

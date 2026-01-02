@@ -1,9 +1,9 @@
 #include "../../include/Comandos/LSolo.h"
 #include "../../include/Core/Simulador.h"
-#include "../../include/Core/Jardim.h"   // <--- Faltava incluir
-#include "../../include/Core/Posicao.h"  // <--- Faltava incluir
-#include "../../include/Entidades/Planta.h" // Para mostrar detalhes da planta
-#include "../../include/Items/Ferramenta.h" // Para mostrar detalhes da ferramenta
+#include "../../include/Core/Jardim.h"
+#include "../../include/Core/Posicao.h"
+#include "../../include/Entidades/Planta.h"
+#include "../../include/Items/Ferramenta.h"
 #include <iostream>
 #include <sstream>
 
@@ -42,7 +42,6 @@ LSolo::LSolo(const std::vector<std::string>& args): raio(0)
     }
 
     this->valido = true;
-    // std::cout << "DEBUG: Comando 'lsolo " << coord << " " << raio << "' validado.\n";
 }
 
 bool LSolo::executa(Simulador& s) {
@@ -55,21 +54,16 @@ bool LSolo::executa(Simulador& s) {
 
     Jardim* jardim = s.getJardim();
 
-    // Converter a coordenada central (ex: "aa" -> 0, 0)
     int centroL = this->coord[0] - 'a';
     int centroC = this->coord[1] - 'a';
 
     std::cout << "--- Analise de Solo (Centro: " << coord << " | Raio: " << raio << ") ---\n";
 
-    // Percorrer a área baseada no raio
     for (int l = centroL - raio; l <= centroL + raio; l++) {
         for (int c = centroC - raio; c <= centroC + raio; c++) {
-
-            // Verifica se a coordenada existe no jardim
             if (jardim->isPosicaoValida(l, c)) {
                 Posicao* p = jardim->getPosicao(l, c);
 
-                // Formatar a coordenada para texto (ex: AA)
                 char coordL = (char)('A' + l);
                 char coordC = (char)('A' + c);
 
@@ -77,7 +71,6 @@ bool LSolo::executa(Simulador& s) {
                 std::cout << "Agua: " << p->getAgua() << " | ";
                 std::cout << "Nutri: " << p->getNutrientes();
 
-                // Mostrar Planta se existir
                 if (p->getPlanta() != nullptr) {
                     std::cout << " | Planta: " << p->getPlanta()->getBeleza()
                               << " (" << p->getPlanta()->getChar() << ")";
@@ -85,7 +78,6 @@ bool LSolo::executa(Simulador& s) {
                     std::cout << " | Planta: Nenhuma";
                 }
 
-                // Mostrar Ferramenta se existir
                 if (p->getFerramenta() != nullptr) {
                     std::cout << " | Item: " << p->getFerramenta()->getNome();
                 }

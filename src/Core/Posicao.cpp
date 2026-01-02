@@ -4,12 +4,12 @@
 #include "../../include/Items/Ferramenta.h"
 #include <cstdlib>
 #include <iostream>
-#include <algorithm> // Para std::min
+#include <algorithm>
 
 Posicao::Posicao() {
     planta = nullptr;
     ferramenta = nullptr;
-    // Valores iniciais aleatórios dentro dos limites do Settings
+
     int minAgua = Settings::Jardim::agua_min;
     int maxAgua = Settings::Jardim::agua_max;
     int minNutri = Settings::Jardim::nutrientes_min;
@@ -24,29 +24,24 @@ Posicao::~Posicao() {
     if (ferramenta != nullptr) delete ferramenta;
 }
 
-// Getters
 int Posicao::getAgua() const { return agua; }
 int Posicao::getNutrientes() const { return nutrientes; }
 Planta* Posicao::getPlanta() const { return planta; }
 Ferramenta* Posicao::getFerramenta() const { return ferramenta; }
 
-// Setters Simples
 void Posicao::setAgua(int valor) { agua = (valor < 0) ? 0 : valor; }
 void Posicao::setNutrientes(int valor) { nutrientes = (valor < 0) ? 0 : valor; }
 
-// Modificadores (Adicionar)
 void Posicao::addAgua(int valor) {
     this->agua += valor;
-    if (this->agua < 0) this->agua = 0; // Proteção contra negativos
+    if (this->agua < 0) this->agua = 0;
 }
 
 void Posicao::addNutrientes(int valor) {
     this->nutrientes += valor;
-    if (this->nutrientes < 0) this->nutrientes = 0; // Proteção contra negativos
+    if (this->nutrientes < 0) this->nutrientes = 0;
 }
 
-// Tenta retirar uma quantidade. Se não houver suficiente, retira tudo o que há.
-// Devolve a quantidade que realmente foi retirada.
 int Posicao::retiraAgua(int qtd) {
     int disponivel = this->agua;
     int aRetirar = std::min(disponivel, qtd);

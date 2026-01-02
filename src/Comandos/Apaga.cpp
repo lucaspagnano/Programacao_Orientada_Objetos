@@ -14,9 +14,6 @@ Apaga::Apaga(const std::vector<std::string>& args) {
 
 bool Apaga::executa(Simulador& s) {
     if (!this->valido) return false;
-
-    // Chama a nova função do simulador
     s.apagarSave(this->nomeCopia);
-
     return true;
 }

@@ -36,35 +36,27 @@ bool LArea::executa(Simulador& s) {
             bool temCoisa = false;
             std::string conteudoStr = "";
 
-            // 1. Verifica Planta
             if (p->getPlanta() != nullptr) {
                 conteudoStr += "[Planta: " + p->getPlanta()->getBeleza() + " (" + p->getPlanta()->getChar() + ")] ";
                 temCoisa = true;
             }
 
-            // 2. Verifica Ferramenta (se existir no chão - assumindo que getFerramenta devolve algo)
-            // Se ainda nao implementaste getFerramenta no Posicao, esta parte fica comentada ou vazia
-            /*
-            if (p->temFerramenta()) { // Exemplo hipotético
+            if (p->getFerramenta()) { // Exemplo hipotético
                  conteudoStr += "[Ferramenta] ";
                  temCoisa = true;
             }
-            */
 
-            // 3. Verifica Jardineiro
             if (jardineiro->estaNoJardim() && jardineiro->getPosLinha() == l && jardineiro->getPosColuna() == c) {
                 conteudoStr += "[JARDINEIRO] ";
                 temCoisa = true;
             }
 
-            // Se encontrou alguma coisa nesta célula, imprime
             if (temCoisa) {
                 encontrouAlgo = true;
                 char coordL = 'A' + l;
                 char coordC = 'A' + c;
 
                 std::cout << "Posicao " << coordL << coordC << ": " << conteudoStr << "\n";
-                // Mostra também os dados do solo dessa posição
                 std::cout << "  -> Solo: Agua=" << p->getAgua() << " | Nutri=" << p->getNutrientes() << "\n";
             }
         }

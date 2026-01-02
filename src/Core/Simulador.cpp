@@ -29,7 +29,6 @@
 #include <vector>
 #include <sstream>
 
-//funcao ajuda para criar comando
 std::vector<std::string> splitString(const std::string& str) {
     std::stringstream ss(str);
     std::string palavra;
@@ -47,11 +46,8 @@ Simulador::Simulador(): jardim(nullptr),jardineiro(),instanteAtual(0),running(tr
 }
 
 Simulador::~Simulador() {
-    // 1. Apagar o jardim atual
     delete jardim;
 
-    // 2. Apagar todos os jardins guardados nos saves (CRITICO PARA A NOTA)
-    // O mapa guarda pares {nome, ponteiro}. Temos de apagar o ponteiro (second).
     for (auto const& [nome, saveJardim] : saves) {
         delete saveJardim;
     }
@@ -86,10 +82,7 @@ void Simulador::avancaInstante(int n) {
         jardineiro.resetContadoresTurno();
 
         if (jardim != nullptr) {
-            // 1. O Jardineiro trabalha
             jardineiro.usarFerramenta(*jardim);
-
-            // 2. As Plantas vivem (NOVO)
             jardim->atualizarPlantas();
         }
     }
@@ -114,8 +107,6 @@ bool Simulador::converteCoord(const std::string& coord, int& l, int& c) const {
     return (l >= 0 && l < 26 && c >= 0 && c < 26);
 }
 
-
-// fabrica de comandos
 Comando* Simulador::criaComando(const std::string& linha) {
     std::vector<std::string> palavras = splitString(linha);
     if (palavras.empty()) {
@@ -149,37 +140,26 @@ Comando* Simulador::criaComando(const std::string& linha) {
     return nullptr;
 }
 
-// --- Processamento Central de Comandos ---
-// Esta é a função que resolve o erro de linker e permite a recursão do 'executa'
-
 void Simulador::processaComando(const std::string& linha) {
     Comando* cmd = criaComando(linha);
 
-    // Se o comando for inválido ou vazio, não fazemos nada
     if (cmd == nullptr) {
         return;
     }
 
-    // Validações Globais
-    // Verifica se é um comando que pode correr sem Jardim (apenas 'jardim' e 'executa')
     bool eJardimCmd = (dynamic_cast<JardimCmd*>(cmd) != nullptr);
     bool eExecutaCmd = (dynamic_cast<Executa*>(cmd) != nullptr);
 
     if (!isJardimCriado() && !eJardimCmd && !eExecutaCmd) {
         std::cout << "Erro: O jardim ainda nao foi criado. Comece por usar o comando 'jardim'.\n";
-        delete cmd; // Limpar memória antes de sair
+        delete cmd;
         return;
     }
 
-    // Executa o comando
-    // Passamos '*this' (o próprio simulador) para o comando atuar sobre ele
     cmd->executa(*this);
 
-    // Limpeza de memória: O comando já foi executado, não precisamos mais do objeto
     delete cmd;
 }
-
-// --- Ciclo Principal (Game Loop) ---
 
 void Simulador::run() {
     std::string linha;
@@ -189,9 +169,8 @@ void Simulador::run() {
 
         std::cout << "Instante " << instanteAtual << " > ";
 
-        // Lê input do utilizador
         if (!std::getline(std::cin, linha)) {
-            break; // EOF (Ctrl+D/Z)
+            break;
         }
 
         if (linha == "fim") {
@@ -199,7 +178,6 @@ void Simulador::run() {
             continue;
         }
 
-        // Processa a linha lida usando a lógica central
         processaComando(linha);
     }
 }
@@ -211,12 +189,10 @@ void Simulador::salvarJogo(const std::string& nome) {
         return;
     }
 
-    // Se já existe um save com este nome, apaga o antigo
     if (saves.find(nome) != saves.end()) {
         delete saves[nome];
     }
 
-    // Cria uma CÓPIA PROFUNDA do jardim (usa o construtor de cópia do Jardim)
     saves[nome] = new Jardim(*jardim);
     std::cout << "Jogo gravado com sucesso: '" << nome << "'.\n";
 }
@@ -227,13 +203,10 @@ void Simulador::recuperarJogo(const std::string& nome) {
         return;
     }
 
-
     delete jardim;
 
-    // Recupera a cópia (Deep Copy novamente para não estragar o save original se continuarmos a jogar)
     jardim = new Jardim(*saves[nome]);
 
-    // "A cópia é eliminada". Se for para apagar do mapa:
     delete saves[nome];
     saves.erase(nome);
 
@@ -241,16 +214,13 @@ void Simulador::recuperarJogo(const std::string& nome) {
 }
 
 void Simulador::apagarSave(const std::string& nome) {
-    // Verifica se o save existe no mapa
     if (saves.find(nome) == saves.end()) {
         std::cout << "Erro: A copia de seguranca '" << nome << "' nao existe.\n";
         return;
     }
 
-    // 1. Liberta a memoria do Jardim guardado
     delete saves[nome];
 
-    // 2. Remove a entrada do mapa
     saves.erase(nome);
 
     std::cout << "Copia '" << nome << "' foi apagada da memoria com sucesso.\n";

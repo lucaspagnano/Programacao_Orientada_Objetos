@@ -3,7 +3,6 @@
 #include <iostream>
 
 Sai::Sai(const std::vector<std::string>& args) {
-    // CORREÇÃO: 'sai' não tem argumentos, por isso o vetor deve estar vazio
     if (!args.empty()) {
         std::cout << "Erro: Comando 'sai' nao aceita argumentos.\n";
         this->valido = false;

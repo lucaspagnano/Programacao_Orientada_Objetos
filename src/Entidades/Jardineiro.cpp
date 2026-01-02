@@ -18,11 +18,9 @@ Jardineiro::Jardineiro()
 }
 
 Jardineiro::~Jardineiro() {
-    // Apaga a ferramenta da mão se existir
     if (ferramentaNaMao != nullptr) {
         delete ferramentaNaMao;
     }
-    // Apaga as restantes do inventário (para evitar fugas de memória)
     for (Ferramenta* f : ferramentasTransportadas) {
         if (f != nullptr) delete f;
     }
@@ -59,12 +57,10 @@ void Jardineiro::move(char direcao) {
 void Jardineiro::apanhaFerramenta(Ferramenta* f) {
     if (f == nullptr) return;
 
-    // Se não tiver nada na mão, fica logo com esta
     if (ferramentaNaMao == nullptr) {
         ferramentaNaMao = f;
         std::cout << "Jardineiro apanhou " << f->getNome() << " (ID: " << f->getNumSerie() << ") e ficou com ela na mao.\n";
     } else {
-        // Senão, guarda na mochila
         ferramentasTransportadas.push_back(f);
         std::cout << "Jardineiro guardou " << f->getNome() << " (ID: " << f->getNumSerie() << ") na mochila.\n";
     }
@@ -74,20 +70,15 @@ Ferramenta* Jardineiro::getFerramentaNaMao() {
     return ferramentaNaMao;
 }
 
-
-// === IMPLEMENTAÇÃO DA LÓGICA DE USO ===
-
 void Jardineiro::usarFerramenta(Jardim& jardim) {
     if (!noJardim || ferramentaNaMao == nullptr) {
-        return; // Não faz nada se não estiver no jardim ou de mãos vazias
+        return;
     }
 
     std::cout << "[Jardineiro] A usar " << ferramentaNaMao->getNome() << "...\n";
 
-    // 1. Usa a ferramenta na posição atual
     ferramentaNaMao->usar(jardim, posLinha, posColuna);
 
-    // 2. Verifica se a ferramenta quebrou/acabou
     if (ferramentaNaMao->deveQuebrar()) {
         std::cout << "!!! A ferramenta " << ferramentaNaMao->getNome()
                   << " (ID: " << ferramentaNaMao->getNumSerie() << ") quebrou/acabou e foi deitada fora! !!!\n";
@@ -96,8 +87,6 @@ void Jardineiro::usarFerramenta(Jardim& jardim) {
         ferramentaNaMao = nullptr;
     }
 }
-
-// === GESTÃO DE INVENTÁRIO (Comandos lferr, larga, pega) ===
 
 void Jardineiro::listarFerramentas() const {
     std::cout << "--- Inventario do Jardineiro ---\n";
@@ -124,16 +113,13 @@ void Jardineiro::largaFerramenta() {
         return;
     }
 
-    // Guarda na mochila (vector)
     ferramentasTransportadas.push_back(ferramentaNaMao);
     std::cout << "Guardaste " << ferramentaNaMao->getNome() << " na mochila.\n";
 
-    // Esvazia a mão
     ferramentaNaMao = nullptr;
 }
 
 void Jardineiro::pegaFerramenta(int numSerie) {
-    // 1. Procura na mochila
     auto it = std::find_if(ferramentasTransportadas.begin(), ferramentasTransportadas.end(),
         [numSerie](Ferramenta* f) { return f->getNumSerie() == numSerie; });
 
@@ -142,20 +128,15 @@ void Jardineiro::pegaFerramenta(int numSerie) {
         return;
     }
 
-    // 2. Guardar temporariamente o ponteiro da ferramenta que queremos pegar
     Ferramenta* novaFerramenta = *it;
 
-    // 3. Remover IMEDIATAMENTE da mochila (antes de fazer push_back de outra coisa)
-    // Assim evitamos problemas com iteradores inválidos
     ferramentasTransportadas.erase(it);
 
-    // 4. Se tiver algo na mão, guarda na mochila
     if (ferramentaNaMao != nullptr) {
         std::cout << "Guardaste " << ferramentaNaMao->getNome() << " na mochila.\n";
         ferramentasTransportadas.push_back(ferramentaNaMao);
     }
 
-    // 5. Coloca a nova ferramenta na mão
     ferramentaNaMao = novaFerramenta;
 
     std::cout << "Pegaste em " << ferramentaNaMao->getNome() << " (ID: " << numSerie << ").\n";
@@ -164,14 +145,12 @@ void Jardineiro::pegaFerramenta(int numSerie) {
 void Jardineiro::compraFerramenta(Ferramenta* f) {
     if (f == nullptr) return;
 
-    // Adiciona a ferramenta comprada diretamente a mochila
     ferramentasTransportadas.push_back(f);
 
     std::cout << "DEBUG: O Jardineiro guardou " << f->getNome()
               << " na mochila. Total de itens: " << ferramentasTransportadas.size() << "\n";
 }
 
-// Contadores (Mantêm-se iguais)
 void Jardineiro::resetContadoresTurno() {
     movimentosTurno = Settings::Jardineiro::max_movimentos;
     plantacoesTurno = Settings::Jardineiro::max_plantacoes;
@@ -189,21 +168,17 @@ void Jardineiro::registarColheita() { if (colheitasTurno > 0) colheitasTurno--; 
 void Jardineiro::registarEntradaSaida() { if (entradasSaidasTurno > 0) entradasSaidasTurno--; }
 
 void Jardineiro::colherPlanta(Jardim& jardim) {
-    // 1. Verificar se o jardineiro está dentro do jardim
     if (!estaNoJardim()) {
         std::cout << "O jardineiro nao esta no jardim.\n";
         return;
     }
 
-    // 2. Verificar a QUOTA de colheitas (Decremento)
-    // Usa o metodo que ja tens: return colheitasTurno > 0;
     if (!podeColher()) {
         std::cout << "Ja atingiste o limite de " << Settings::Jardineiro::max_colheitas
                   << " colheitas por turno! Avanca o tempo para recarregar.\n";
         return;
     }
 
-    // 3. Obter a planta
     Posicao* p = jardim.getPosicao(posLinha, posColuna);
     Planta* planta = p->getPlanta();
 
@@ -212,20 +187,16 @@ void Jardineiro::colherPlanta(Jardim& jardim) {
         return;
     }
 
-    // 4. Verificar se é Erva Daninha (nao gasta quota)
     std::string beleza = planta->getBeleza();
     if (beleza == "Feia" || beleza == "feia") {
         std::cout << "Nao deves colher Ervas Daninhas a mao! Usa a Tesoura e avanca o tempo.\n";
         return;
     }
 
-    // 5. AÇÃO DE COLHEITA (Sucesso)
-    // Decrementa o contador: colheitasTurno--
     registarColheita();
 
     std::cout << "Colheste uma planta " << beleza << " (" << planta->getChar() << ")!\n";
     std::cout << "Restam " << this->colheitasTurno << " colheitas neste turno.\n";
 
-    // Remove do jardim e limpa memória
     delete p->removePlanta();
 }

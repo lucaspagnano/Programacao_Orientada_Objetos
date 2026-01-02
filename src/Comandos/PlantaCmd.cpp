@@ -7,7 +7,6 @@
 #include "../../include/Entidades/Roseira.h"
 #include "../../include/Entidades/Cacto.h"
 #include "../../include/Entidades/ErvaDaninha.h"
-// #include "../../include/Entidades/Plantas/PlantaExotica.h" // Se tiveres
 #include <iostream>
 
 PlantaCmd::PlantaCmd(const std::vector<std::string>& args) {
@@ -16,7 +15,6 @@ PlantaCmd::PlantaCmd(const std::vector<std::string>& args) {
         this->valido = false;
         return;
     }
-    // Validacoes de tamanho
     if (args[0].length() != 2 || args[1].length() != 1) {
         this->valido = false; return;
     }
@@ -24,7 +22,6 @@ PlantaCmd::PlantaCmd(const std::vector<std::string>& args) {
     this->coord = args[0];
     this->tipoPlanta = args[1][0];
 
-    // Validar tipo
     if (tipoPlanta != 'c' && tipoPlanta != 'r' && tipoPlanta != 'e' && tipoPlanta != 'x') {
         std::cout << "Erro: Tipo invalido. Use (c, r, e, x).\n";
         this->valido = false;
@@ -39,13 +36,11 @@ bool PlantaCmd::executa(Simulador& s) {
 
     Jardineiro* jardineiro = s.getJardineiro();
 
-    // 1. Verifica Quota de Plantacao
     if (!jardineiro->podePlantar()) {
         std::cout << "Ja atingiste o limite de plantacoes por turno (Max: 2). Avanca o tempo.\n";
         return false;
     }
 
-    // 2. Converte e Valida Coordenadas
     int l = this->coord[0] - 'a';
     int c = this->coord[1] - 'a';
     Jardim* j = s.getJardim();
@@ -57,13 +52,11 @@ bool PlantaCmd::executa(Simulador& s) {
 
     Posicao* p = j->getPosicao(l, c);
 
-    // 3. Verifica se ja tem planta
     if (p->getPlanta() != nullptr) {
         std::cout << "Ja existe uma planta nessa posicao!\n";
         return false;
     }
 
-    // 4. Cria a Planta
     Planta* novaPlanta = nullptr;
     switch (this->tipoPlanta) {
         case 'r': novaPlanta = new Roseira(); break;
@@ -73,7 +66,6 @@ bool PlantaCmd::executa(Simulador& s) {
         default: std::cout << "Erro interno.\n"; return false;
     }
 
-    // 5. Coloca no Solo e Desconta Quota
     p->setPlanta(novaPlanta);
     jardineiro->registarPlantacao();
 
