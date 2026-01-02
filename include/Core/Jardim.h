@@ -15,8 +15,6 @@ public:
     Jardim(int l, int c);
     ~Jardim();
 
-    //Jardim(const Jardim&) = delete;
-    //Jardim& operator=(const Jardim&) = delete;
     Jardim(const Jardim &origem);
 
     int getLinhas() const;

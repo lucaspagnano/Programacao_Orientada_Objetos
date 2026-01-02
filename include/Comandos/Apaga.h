@@ -5,7 +5,6 @@
 #include <string>
 
 class Apaga : public Comando {
-    // Membro para guardar o nome da cópia
     std::string nomeCopia;
 
 public:
