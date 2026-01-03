@@ -37,6 +37,11 @@ bool PlantaCmd::executa(Simulador& s) {
 
     Jardineiro* jardineiro = s.getJardineiro();
 
+    if (!jardineiro->estaNoJardim()) {
+        std::cout << "Erro: O jardineiro ainda nao esta no jardim.\n";
+        return false;
+    }
+
     if (!jardineiro->podePlantar()) {
         std::cout << "Ja atingiste o limite de plantacoes por turno (Max: 2). Avanca o tempo.\n";
         return false;

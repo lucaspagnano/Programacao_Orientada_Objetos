@@ -169,7 +169,7 @@ void Jardineiro::registarEntradaSaida() { if (entradasSaidasTurno > 0) entradasS
 
 void Jardineiro::colherPlanta(Jardim& jardim) {
     if (!estaNoJardim()) {
-        std::cout << "O jardineiro ainda nao esta no jardim.\n";
+        std::cout << "Erro: O jardineiro ainda nao esta no jardim.\n";
         return;
     }
 

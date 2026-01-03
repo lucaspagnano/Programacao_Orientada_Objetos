@@ -24,7 +24,7 @@ Move::Move(const std::vector<std::string>& args): direcao('?')
 bool Move::executa(Simulador& s) {
     if (!this->valido) return false;
     if (!s.isJardimCriado()) {
-        std::cout << "Erro: Jardim nao criado.\n";
+        std::cout << "Erro: Jardim nao foi criado.\n";
         return false;
     }
 
