@@ -69,7 +69,7 @@ O simulador é controlado através de comandos de texto introduzidos na consola.
 ### 🌿 Ações no Jardim
 | Comando | Descrição |
 | :--- | :--- |
-| `colhe <l><c>` | Colhe a planta na posição indicada. Máx 5 por turno. |
+| `colhe` | Colhe a planta na posição atual. Máx 5 por turno. |
 | `planta <l><c> <t>`| Planta uma espécie (`c`, `r`, `e`, `x`) na posição indicada. Máx 2 por turno. |
 | `compra <t>` | Compra uma ferramenta do tipo `g`, `a`, `t` ou `z`. |
 | `pega <id>` | Coloca na mão a ferramenta com o número de série `id`. |
