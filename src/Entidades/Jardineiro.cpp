@@ -114,7 +114,7 @@ void Jardineiro::largaFerramenta() {
     }
 
     ferramentasTransportadas.push_back(ferramentaNaMao);
-    std::cout << ferramentaNaMao->getNome() << "guardada/o na mochila.\n";
+    std::cout << ferramentaNaMao->getNome() << " guardada/o na mochila.\n";
 
     ferramentaNaMao = nullptr;
 }
@@ -195,7 +195,7 @@ void Jardineiro::colherPlanta(Jardim& jardim) {
 
     registarColheita();
 
-    std::cout << "Planta colhida: " << beleza << " (" << planta->getChar() << ")!\n";
+    std::cout << "Planta colhida: " << beleza << " (" << planta->getChar() << ").\n";
     std::cout << "Restam " << this->colheitasTurno << " colheitas neste turno.\n";
 
     delete p->removePlanta();
