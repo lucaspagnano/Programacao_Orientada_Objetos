@@ -84,9 +84,3 @@ O simulador é controlado através de comandos de texto introduzidos na consola.
 | `lsolo <l><c> [n]`| Mostra detalhes do solo na posição (opcional: quadrado de raio `n`). |
 | `lferr` | Lista as ferramentas na posse do jardineiro. |
 
----
-
-### 📝 Notas de Compilação
-
-Este projeto foi desenvolvido para ser compilado em ambiente C++.
-Recomenda-se a utilização de um IDE como o **CLion** ou compilação via terminal garantindo suporte a C++11 ou superior.
