@@ -28,10 +28,10 @@ As plantas interagem com o solo e possuem ciclos de vida específicos. Existem 4
 ### 🛠️ As Ferramentas
 O jardineiro pode encontrar ou comprar ferramentas. Cada ferramenta possui um número de série único.
 
-**Regador (`g`):** Adiciona água ao solo. [cite_start]Capacidade limitada.
-**Pacote de Adubo (`a`):** Adiciona nutrientes ao solo. [cite_start]Descartável após uso.
-**Tesoura de Poda (`t`):** Remove plantas consideradas "feias" na posição atual.
-**FerramentaZ (`z`):** Ferramenta especial com funcionalidades exclusivas.
+1.  **Regador (`g`):** Adiciona água ao solo. Capacidade limitada. <br>
+2.  **Pacote de Adubo (`a`):** Adiciona nutrientes ao solo. Descartável após uso. <br>
+3.  **Tesoura de Poda (`t`):** Remove plantas consideradas "feias" na posição atual. <br>
+4.  **FerramentaZ (`z`):** Ferramenta especial com funcionalidades exclusivas - Drone de Rega. <br>
 
 ---
 
