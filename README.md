@@ -13,8 +13,8 @@ A simulação não ocorre em tempo real, mas sim através de **instantes** (turn
 ## ⚙️ Funcionalidades e Regras
 
 ### 🗺️ O Jardim
-**Grelha:** O jardim é uma área retangular (máximo 26x26) representada por caracteres na consola.
-**Solo:** Cada posição da grelha possui níveis independentes de **Água** e **Nutrientes**.
+**Grelha:** O jardim é uma área retangular (máximo 26x26) representada por caracteres na consola. <br>
+**Solo:** Cada posição da grelha possui níveis independentes de **Água** e **Nutrientes**. <br>
 **Visualização:** O sistema de "renderização" dá prioridade de visualização na ordem: Jardineiro > Planta > Ferramenta.
 
 ### 🌱 As Plantas
@@ -37,10 +37,10 @@ O jardineiro pode encontrar ou comprar ferramentas. Cada ferramenta possui um n�
 
 ## 💻 Detalhes Técnicos
 
-** C++ Standard.
-** Consola (CLI).
-**Estruturas de Dados:** A gestão da grelha do jardim foi implementada sem recurso a contentores da biblioteca standard (ex: `std::vector` ou `std::list` não são usados para a matriz do solo), utilizando estruturas dinâmicas próprias[cite: 35].
-**Configuração:** Todos os parâmetros de simulação (vida inicial, taxas de absorção, limites) são carregados através da classe `Settings`[cite: 55].
+** C++ Standard. ** <br>
+** Consola (CLI). ** <br>
+**Estruturas de Dados:** A gestão da grelha do jardim foi implementada sem recurso a contentores da biblioteca standard (ex: `std::vector` ou `std::list` não são usados para a matriz do solo), utilizando estruturas dinâmicas próprias. <br>
+**Configuração:** Todos os parâmetros de simulação (vida inicial, taxas de absorção, limites) são carregados através da classe `Settings`.
 
 ---
 
