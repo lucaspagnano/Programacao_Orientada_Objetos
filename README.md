@@ -13,8 +13,8 @@ A simulação não ocorre em tempo real, mas sim através de **instantes** (turn
 ## ⚙️ Funcionalidades e Regras
 
 ### 🗺️ O Jardim
-**Grelha:** O jardim é uma área retangular (máximo 26x26) representada por caracteres na consola.
-**Solo:** Cada posição da grelha possui níveis independentes de **Água** e **Nutrientes**.
+**Grelha:** O jardim é uma área retangular (máximo 26x26) representada por caracteres na consola. <br>
+**Solo:** Cada posição da grelha possui níveis independentes de **Água** e **Nutrientes**. <br>
 **Visualização:** O sistema de "renderização" dá prioridade de visualização na ordem: Jardineiro > Planta > Ferramenta.
 
 ### 🌱 As Plantas
@@ -28,19 +28,19 @@ As plantas interagem com o solo e possuem ciclos de vida específicos. Existem 4
 ### 🛠️ As Ferramentas
 O jardineiro pode encontrar ou comprar ferramentas. Cada ferramenta possui um número de série único.
 
-**Regador (`g`):** Adiciona água ao solo. [cite_start]Capacidade limitada.
-**Pacote de Adubo (`a`):** Adiciona nutrientes ao solo. [cite_start]Descartável após uso.
-**Tesoura de Poda (`t`):** Remove plantas consideradas "feias" na posição atual.
-**FerramentaZ (`z`):** Ferramenta especial com funcionalidades exclusivas.
+1.  **Regador (`g`):** Adiciona água ao solo. Capacidade limitada. <br>
+2.  **Pacote de Adubo (`a`):** Adiciona nutrientes ao solo. Descartável após uso. <br>
+3.  **Tesoura de Poda (`t`):** Remove plantas consideradas "feias" na posição atual. <br>
+4.  **FerramentaZ (`z`):** Ferramenta especial com funcionalidades exclusivas - Drone de Rega. <br>
 
 ---
 
 ## 💻 Detalhes Técnicos
 
-** C++ Standard.
-** Consola (CLI).
-**Estruturas de Dados:** A gestão da grelha do jardim foi implementada sem recurso a contentores da biblioteca standard (ex: `std::vector` ou `std::list` não são usados para a matriz do solo), utilizando estruturas dinâmicas próprias[cite: 35].
-**Configuração:** Todos os parâmetros de simulação (vida inicial, taxas de absorção, limites) são carregados através da classe `Settings`[cite: 55].
+**C++ Standard.** <br>
+**Consola (CLI).** <br>
+**Estruturas de Dados:** A gestão da grelha do jardim foi implementada sem recurso a contentores da biblioteca standard (ex: `std::vector` ou `std::list` não são usados para a matriz do solo), utilizando estruturas dinâmicas próprias. <br>
+**Configuração:** Todos os parâmetros de simulação (vida inicial, taxas de absorção, limites) são carregados através da classe `Settings`.
 
 ---
 
@@ -84,9 +84,3 @@ O simulador é controlado através de comandos de texto introduzidos na consola.
 | `lsolo <l><c> [n]`| Mostra detalhes do solo na posição (opcional: quadrado de raio `n`). |
 | `lferr` | Lista as ferramentas na posse do jardineiro. |
 
----
-
-### 📝 Notas de Compilação
-
-Este projeto foi desenvolvido para ser compilado em ambiente C++.
-Recomenda-se a utilização de um IDE como o **CLion** ou compilação via terminal garantindo suporte a C++11 ou superior.
