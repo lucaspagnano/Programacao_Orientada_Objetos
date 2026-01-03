@@ -37,8 +37,8 @@ O jardineiro pode encontrar ou comprar ferramentas. Cada ferramenta possui um n�
 
 ## 💻 Detalhes Técnicos
 
-** C++ Standard. ** <br>
-** Consola (CLI). ** <br>
+**C++ Standard.** <br>
+**Consola (CLI).** <br>
 **Estruturas de Dados:** A gestão da grelha do jardim foi implementada sem recurso a contentores da biblioteca standard (ex: `std::vector` ou `std::list` não são usados para a matriz do solo), utilizando estruturas dinâmicas próprias. <br>
 **Configuração:** Todos os parâmetros de simulação (vida inicial, taxas de absorção, limites) são carregados através da classe `Settings`.
 
