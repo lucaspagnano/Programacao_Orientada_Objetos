@@ -14,7 +14,7 @@ Jardineiro::Jardineiro()
       ferramentaNaMao(nullptr)
 {
     resetContadoresTurno();
-    //std::cout << "DEBUG: Jardineiro criado.\n";
+    //std::cout << "Jardineiro criado.\n";
 }
 
 Jardineiro::~Jardineiro() {
