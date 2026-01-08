@@ -33,14 +33,13 @@
 
 std::vector<std::string> splitString(const std::string& str) {
     std::stringstream ss(str);
-    std::string palavra;
-    std::vector<std::string> palavras;
-    while (ss >> palavra) {
-        palavras.push_back(palavra);
+    std::string palavra; // var temporaria vazia
+    std::vector<std::string> palavras; // vetor para acumular resultado final 
+    while (ss >> palavra) { // ciclo que extrai do stream ss para palavra
+        palavras.push_back(palavra); // adiciona a palavra no final do vetor 
     }
     return palavras;
 }
-
 
 Simulador::Simulador(): jardim(nullptr),jardineiro(),instanteAtual(0),running(true)
 {
@@ -48,9 +47,9 @@ Simulador::Simulador(): jardim(nullptr),jardineiro(),instanteAtual(0),running(tr
 }
 
 Simulador::~Simulador() {
-    delete jardim;
+    delete jardim; // aciona destrutor do jardim
 
-    for (auto const& [nome, saveJardim] : saves) {
+    for (auto const& [nome, saveJardim] : saves) { // ciclo para percorrer todos os jogos guardados no mapa 
         delete saveJardim;
     }
     saves.clear();
@@ -72,20 +71,21 @@ bool Simulador::isJardimCriado() const {
 
 void Simulador::criaJardim(int l, int c) {
     if (jardim == nullptr) {
-        jardim = new Jardim(l, c);
+        jardim = new Jardim(l, c); // so executa se o ponteiro jardim estiver vazio 
     }
 }
 
+// passagem de instantes e faz plantas agirem
 void Simulador::avancaInstante(int n) {
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) { // avanca n instantes
         instanteAtual++;
-        //std::cout << "\n--- Avancando para o Instante " << instanteAtual << " ---\n";
+        //std::cout << "\n Avancando para o Instante " << instanteAtual << " \n";
 
-        jardineiro.resetContadoresTurno();
+        jardineiro.resetContadoresTurno(); // reinicia energia do jardineiro
 
-        if (jardim != nullptr) {
-            jardineiro.usarFerramenta(*jardim);
-            jardim->atualizarPlantas();
+        if (jardim != nullptr) { // se jardim existir
+            jardineiro.usarFerramenta(*jardim); // utiliza ferramente
+            jardim->atualizarPlantas(); // faz planta agir 
         }
     }
 }
@@ -94,9 +94,10 @@ void Simulador::shutdown() {
     running = false;
 }
 
+//funcao que pede ao jardim para se desenhar 
 void Simulador::mostraJardim() const {
     if (jardim != nullptr) {
-        jardim->desenha(jardineiro);
+        jardim->desenha(jardineiro); // envia jardineiro para saber onde o mesmo esta e desenhar *
     }
 }
 
@@ -110,14 +111,15 @@ bool Simulador::converteCoord(const std::string& coord, int& l, int& c) const {
 }
 
 Comando* Simulador::criaComando(const std::string& linha) {
-    std::vector<std::string> palavras = splitString(linha);
+    std::vector<std::string> palavras = splitString(linha); // parte a frase em palavras
     if (palavras.empty()) {
         return nullptr;
     }
 
-    std::string nomeCmd = palavras[0];
-    std::vector<std::string> args(palavras.begin() + 1, palavras.end());
+    std::string nomeCmd = palavras[0]; // copia primeira palavra em nomeCmd
+    std::vector<std::string> args(palavras.begin() + 1, palavras.end()); // cria vetor para args
 
+    // chama contrutores e passa args
     if (nomeCmd == "jardim") return new JardimCmd(args);
     if (nomeCmd == "avanca") return new Avanca(args);
     if (nomeCmd == "lplantas") return new LPlantas(args);
@@ -158,11 +160,12 @@ void Simulador::processaComando(const std::string& linha) {
         return;
     }
 
-    cmd->executa(*this);
+    cmd->executa(*this); // manda comando executar a acao, passamos esse simulador como arg 
 
     delete cmd;
 }
 
+//ciclo principal do jogo
 void Simulador::run() {
     std::string linha;
 
@@ -171,16 +174,16 @@ void Simulador::run() {
 
         std::cout << "\n" << "Instante " << instanteAtual << " > ";
 
-        if (!std::getline(std::cin, linha)) {
+        if (!std::getline(std::cin, linha)) { // programa fica a espera do utilizador escrever comando
             break;
         }
 
         if (linha == "fim") {
-            shutdown();
+            shutdown(); // running = false
             continue;
         }
 
-        processaComando(linha);
+        processaComando(linha); // envia texto para processaComando que chama a fabrica criaComando
     }
 }
 
@@ -191,7 +194,7 @@ void Simulador::salvarJogo(const std::string& nome) {
         return;
     }
 
-    if (saves.find(nome) != saves.end()) {
+    if (saves.find(nome) != saves.end()) { // caso ja tenha um save com esse nome apaga o antigo
         delete saves[nome];
     }
 
@@ -199,22 +202,25 @@ void Simulador::salvarJogo(const std::string& nome) {
     std::cout << "Jogo gravado com sucesso: '" << nome << "'.\n";
 }
 
+// so podemos recuperar uma vez
 void Simulador::recuperarJogo(const std::string& nome) {
     if (saves.find(nome) == saves.end()) {
         std::cout << "Erro: Save '" << nome << "' nao encontrado.\n";
         return;
     }
 
-    delete jardim;
+    delete jardim; // apaga jogo atual
 
-    jardim = new Jardim(*saves[nome]);
+    jardim = new Jardim(*saves[nome]); //cria novo jogo a partir da copia 
 
-    delete saves[nome];
+    // apaga save original
+    delete saves[nome]; 
     saves.erase(nome);
 
     std::cout << "Jogo recuperado de '" << nome << "'. (Save original apagado da memoria)\n";
 }
 
+// mantem a logica de apagar do recupera 
 void Simulador::apagarSave(const std::string& nome) {
     if (saves.find(nome) == saves.end()) {
         std::cout << "Erro: A copia de seguranca '" << nome << "' nao existe.\n";
