@@ -15,8 +15,8 @@ Posicao::Posicao() {
     int minNutri = Settings::Jardim::nutrientes_min;
     int maxNutri = Settings::Jardim::nutrientes_max;
 
-    agua = rand() % (maxAgua - minAgua + 1) + minAgua;
-    nutrientes = rand() % (maxNutri - minNutri + 1) + minNutri;
+    agua = rand() % (maxAgua - minAgua + 1) + minAgua; // gera um valor entre 0 e a diferenca de min e max e dps adiciona o min 
+    nutrientes = rand() % (maxNutri - minNutri + 1) + minNutri; // gera um valor entre 0 e a diferenca de min e max e dps adiciona o min 
 }
 
 Posicao::~Posicao() {
@@ -80,7 +80,7 @@ Ferramenta* Posicao::removeFerramenta() {
 
 char Posicao::getCharVisivel(bool temJardineiro) const {
     if (temJardineiro) return '*';
-    if (planta != nullptr) return planta->getChar();
+    if (planta != nullptr) return planta->getChar(); // chama o metodo e a propria planta decide qual e o char 
     if (ferramenta != nullptr) return ferramenta->getChar();
     return ' ';
 }
