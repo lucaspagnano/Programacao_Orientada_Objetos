@@ -1,3 +1,5 @@
+//teste
+
 #include "../../include/Core/Simulador.h"
 #include "../../include/Core/Jardim.h"
 #include "../../include/Core/Settings.h"
