@@ -42,7 +42,7 @@ std::vector<std::string> splitString(const std::string& str) {
 
 Simulador::Simulador(): jardim(nullptr),jardineiro(),instanteAtual(0),running(true)
 {
-    //std::cout << "DEBUG: Simulador iniciado.\n";
+    //std::cout << "Simulador iniciado.\n";
 }
 
 Simulador::~Simulador() {
@@ -53,7 +53,7 @@ Simulador::~Simulador() {
     }
     saves.clear();
 
-    //std::cout << "DEBUG: Simulador encerrado. Toda a memoria (incluindo saves) foi limpa.\n";
+    //std::cout << "Simulador encerrado. Toda a memoria foi limpa.\n";
 }
 
 Jardim* Simulador::getJardim() {
