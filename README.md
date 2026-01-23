@@ -2,7 +2,7 @@
 
 > **Unidade Curricular:** Programação Orientada a Objetos (POO)  
 > **Instituição:** ISEC - Instituto Superior de Engenharia de Coimbra  
-> **Linguagem:** C++  
+> **Ano Letivo:** 2025/2026
 
 ## 📖 Visão Geral
 
